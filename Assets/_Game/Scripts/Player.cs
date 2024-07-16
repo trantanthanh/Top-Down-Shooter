@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Movement info")]
-    [SerializeField] float moveSpeed = 2f;
+    [SerializeField] float moveSpeed = 2000f;
     [SerializeField] float rotationSpeed = 2f;
     float verticalInput;
     float horizontalInput;
@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Firing()
+    private void Fire()
     {
         if (Time.time > nextTimeFire)
         {
@@ -65,10 +65,11 @@ public class Player : MonoBehaviour
         ApplyMovement();
 
         UpdateAim();
+
         UpdateRotationTankTower();
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            Firing();
+            Fire();
         }
     }
 

@@ -1011,7 +1011,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 714224910917198357, guid: 716437298dd40df449865fa461da6441, type: 3}
   posFire: {fileID: 1162686741}
   firingRate: 0.5
-  bulletSpeed: 5
+  bulletSpeed: 2000
   whatIsAimMask:
     serializedVersion: 2
     m_Bits: 1
