@@ -10,9 +10,13 @@ public class Player : MonoBehaviour
     float verticalInput;
     float horizontalInput;
 
+    [Header("Tower data")]
+    [SerializeField] Transform towerTransform;
+    [SerializeField] float towerRotationSpeed = 2f;
+
     [Space]
     [SerializeField] LayerMask whatIsAimMask;
-    public Transform aimTransform;
+    [SerializeField] Transform aimTransform;
 
     #region Components
     Rigidbody rb;
@@ -40,10 +44,26 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = transform.forward * moveSpeed * verticalInput;
-        transform.Rotate(0, horizontalInput * rotationSpeed, 0);
+        ApplyMovement();
 
         UpdateAim();
+        UpdateRotationTankTower();
+    }
+
+    private void ApplyMovement()
+    {
+        rb.velocity = transform.forward * moveSpeed * verticalInput;
+        transform.Rotate(0, horizontalInput * rotationSpeed, 0);
+    }
+
+    private void UpdateRotationTankTower()
+    {
+        //towerTransform.LookAt(aimTransform);
+        Vector3 direction = (aimTransform.position - towerTransform.position).normalized;
+        direction.y = 0;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        towerTransform.rotation = Quaternion.RotateTowards(towerTransform.rotation, targetRotation, towerRotationSpeed);
     }
 
     private void UpdateAim()
