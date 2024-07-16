@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    float moveSpeed = 2000f;
+    float moveSpeed = 15f;
     private Rigidbody rb => GetComponent<Rigidbody>();
 
     public void SetupBullet(float _speed)
@@ -12,7 +12,7 @@ public class BulletController : MonoBehaviour
         moveSpeed = _speed;
         if (rb != null)
         {
-            rb.velocity = transform.forward * moveSpeed * Time.deltaTime;
+            rb.velocity = transform.forward * moveSpeed;
         }
         Destroy(gameObject, 7f);
     }

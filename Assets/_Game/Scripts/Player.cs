@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [Header("Movement info")]
-    [SerializeField] float moveSpeed = 2000f;
+    [SerializeField] float moveSpeed = 15f;
     [SerializeField] float rotationSpeed = 2f;
     float verticalInput;
     float horizontalInput;
