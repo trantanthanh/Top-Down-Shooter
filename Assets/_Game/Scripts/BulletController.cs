@@ -10,14 +10,10 @@ public class BulletController : MonoBehaviour
     public void SetupBullet(float _speed)
     {
         moveSpeed = _speed;
-        Destroy(gameObject, 7f);
-    }
-
-    private void Update()
-    {
         if (rb != null)
         {
-            rb.velocity = transform.forward * moveSpeed * Time.deltaTime;       
+            rb.velocity = transform.forward * moveSpeed * Time.deltaTime;
         }
+        Destroy(gameObject, 7f);
     }
 }
