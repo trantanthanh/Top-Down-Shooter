@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,13 @@ public class Player : MonoBehaviour
     [Header("Tower data")]
     [SerializeField] Transform towerTransform;
     [SerializeField] float towerRotationSpeed = 2f;
+
+    [Header("Firing info")]
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] Transform posFire;
+    [SerializeField] float firingRate = 0.5f;
+    [SerializeField] float bulletSpeed = 5f;
+    float nextTimeFire = 0f;
 
     [Space]
     [SerializeField] LayerMask whatIsAimMask;
@@ -42,12 +50,26 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Firing()
+    {
+        if (Time.time > nextTimeFire)
+        {
+            nextTimeFire = Time.time + firingRate;
+            GameObject newBullet = Instantiate(bulletPrefab, posFire.position, posFire.rotation);
+            newBullet.GetComponent<BulletController>().SetupBullet(bulletSpeed);
+        }
+    }
+
     private void FixedUpdate()
     {
         ApplyMovement();
 
         UpdateAim();
         UpdateRotationTankTower();
+        if (Input.GetKey(KeyCode.Mouse0))
+        {
+            Firing();
+        }
     }
 
     private void ApplyMovement()
