@@ -155,7 +155,9 @@ PlayerSettings:
   resetResolutionOnWindowResize: 0
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Android: com.DefaultCompany.TopDownShooter
+    Standalone: com.DefaultCompany.Top-Down-Shooter
   buildNumber:
     Standalone: 0
     VisionOS: 0
@@ -838,7 +840,7 @@ PlayerSettings:
   hmiLogStartupTiming: 0
   hmiCpuConfiguration: 
   apiCompatibilityLevel: 6
-  activeInputHandler: 0
+  activeInputHandler: 2
   windowsGamepadBackendHint: 0
   cloudProjectId: 677ccd3d-5971-46e0-a3d4-9650dcad21c4
   framebufferDepthMemorylessMode: 0
