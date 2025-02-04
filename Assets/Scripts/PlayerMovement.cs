@@ -5,14 +5,20 @@ public class PlayerMovement : MonoBehaviour
 {
     private PlayerControls controls;
     private CharacterController characterController;
+
     private float verticalVelocity;
+    [SerializeField] float gravityScale = 9.81f;
 
     public Vector3 movementDirection;
     [Header("Movement Info")]
     [SerializeField] float moveSpeed = 0f;
 
     private Vector2 moveInput;
+    [Header("Aim Info")]
+    [SerializeField] Transform aim;
+    [SerializeField] LayerMask aimLayerMask;
     private Vector2 aimInput;
+    private Vector3 lookingDirection;
 
 
     private void Awake()
@@ -34,13 +40,28 @@ public class PlayerMovement : MonoBehaviour
     {
         ApplyGravity();
         ApplyMovement();
+        AimTowardsMouse();
+    }
+
+    private void AimTowardsMouse()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(aimInput);
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, aimLayerMask))
+        {
+            lookingDirection = hitInfo.point - transform.position;
+            lookingDirection.y = 0f;
+            lookingDirection.Normalize();
+
+            transform.forward = lookingDirection;
+            aim.position = new Vector3(hitInfo.point.x, transform.position.y, hitInfo.point.z);
+        }
     }
 
     private void ApplyGravity()
     {
         if (!characterController.isGrounded)
         {
-            verticalVelocity = verticalVelocity - 9.81f * Time.deltaTime;
+            verticalVelocity = verticalVelocity - gravityScale * Time.deltaTime;
         }
         else
         {
