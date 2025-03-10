@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private PlayerControls controls;
     private CharacterController characterController;
+    private Animator animator;
 
     private float verticalVelocity;
     [SerializeField] float gravityScale = 9.81f;
@@ -34,6 +35,16 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
+        animator = GetComponentInChildren<Animator>();
+    }
+
+    private void AnimatorController()
+    {
+        float xVelocity = Vector3.Dot(movementDirection.normalized, transform.right);
+        float zVelocity = Vector3.Dot(movementDirection.normalized, transform.forward);
+
+        animator.SetFloat("xVelocity", xVelocity);
+        animator.SetFloat("zVelocity", zVelocity);
     }
 
     private void Update()
@@ -41,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
         ApplyGravity();
         ApplyMovement();
         AimTowardsMouse();
+        AnimatorController();
     }
 
     private void AimTowardsMouse()
