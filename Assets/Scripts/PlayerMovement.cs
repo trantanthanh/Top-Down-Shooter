@@ -43,8 +43,8 @@ public class PlayerMovement : MonoBehaviour
         float xVelocity = Vector3.Dot(movementDirection.normalized, transform.right);
         float zVelocity = Vector3.Dot(movementDirection.normalized, transform.forward);
 
-        animator.SetFloat("xVelocity", xVelocity);
-        animator.SetFloat("zVelocity", zVelocity);
+        animator.SetFloat("xVelocity", xVelocity, 0.1f, Time.deltaTime);
+        animator.SetFloat("zVelocity", zVelocity, 0.1f, Time.deltaTime);
     }
 
     private void Update()
