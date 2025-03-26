@@ -12,8 +12,9 @@ public class PlayerMovement : MonoBehaviour
 
     public Vector3 movementDirection;
     [Header("Movement Info")]
-    [SerializeField] float moveSpeed = 0f;
+    [SerializeField] float walkSpeed = 0f;
     [SerializeField] float runSpeed = 0f;
+    float moveSpeed = 0f;
 
     private Vector2 moveInput;
     [Header("Aim Info")]
@@ -34,14 +35,23 @@ public class PlayerMovement : MonoBehaviour
         controls.Character.Aim.performed += context => aimInput = context.ReadValue<Vector2>();
         controls.Character.Aim.canceled += context => aimInput = Vector2.zero;
 
-        controls.Character.Run.performed += context => IsRunning = true;
-        controls.Character.Run.canceled += controls => IsRunning = false;
+        controls.Character.Run.performed += context =>
+        {
+            moveSpeed = runSpeed;
+            IsRunning = true;
+        };
+        controls.Character.Run.canceled += controls =>
+        {
+            moveSpeed = walkSpeed;
+            IsRunning = false;
+        };
     }
 
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
+        moveSpeed = walkSpeed;
     }
 
     private void AnimatorController()
@@ -95,7 +105,7 @@ public class PlayerMovement : MonoBehaviour
         if (movementDirection.magnitude > 0)
         {
             IsMoving = true;
-            characterController.Move(movementDirection * Time.deltaTime * (IsRunning ? runSpeed : moveSpeed));
+            characterController.Move(movementDirection * Time.deltaTime * moveSpeed);
         }
         else
         {
