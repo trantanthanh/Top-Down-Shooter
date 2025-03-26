@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 movementDirection;
     [Header("Movement Info")]
     [SerializeField] float moveSpeed = 0f;
+    [SerializeField] float runSpeed = 0f;
 
     private Vector2 moveInput;
     [Header("Aim Info")]
@@ -20,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask aimLayerMask;
     private Vector2 aimInput;
     private Vector3 lookingDirection;
+    private bool IsMoving = false;
+    private bool IsRunning = false;
 
 
     private void Awake()
@@ -30,6 +33,9 @@ public class PlayerMovement : MonoBehaviour
 
         controls.Character.Aim.performed += context => aimInput = context.ReadValue<Vector2>();
         controls.Character.Aim.canceled += context => aimInput = Vector2.zero;
+
+        controls.Character.Run.performed += context => IsRunning = true;
+        controls.Character.Run.canceled += controls => IsRunning = false;
     }
 
     private void Start()
@@ -45,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("xVelocity", xVelocity, 0.1f, Time.deltaTime);
         animator.SetFloat("zVelocity", zVelocity, 0.1f, Time.deltaTime);
+        animator.SetBool("IsRunning", IsMoving ? IsRunning : false);
+        animator.SetBool("IsMoving", IsMoving);
     }
 
     private void Update()
@@ -86,7 +94,12 @@ public class PlayerMovement : MonoBehaviour
         movementDirection = new Vector3(moveInput.x, verticalVelocity, moveInput.y);
         if (movementDirection.magnitude > 0)
         {
-            characterController.Move(movementDirection * Time.deltaTime * moveSpeed);
+            IsMoving = true;
+            characterController.Move(movementDirection * Time.deltaTime * (IsRunning ? runSpeed : moveSpeed));
+        }
+        else
+        {
+            IsMoving = false;
         }
     }
 

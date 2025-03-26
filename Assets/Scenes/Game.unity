@@ -1039,6 +1039,7 @@ MonoBehaviour:
   gravityScale: 9.81
   movementDirection: {x: 0, y: 0, z: 0}
   moveSpeed: 1.5
+  runSpeed: 5
   aim: {fileID: 634038584}
   aimLayerMask:
     serializedVersion: 2
