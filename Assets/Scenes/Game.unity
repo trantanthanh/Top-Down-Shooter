@@ -619,6 +619,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1096286601}
+  - component: {fileID: 1096286602}
   m_Layer: 0
   m_Name: Weapon_holder
   m_TagString: Untagged
@@ -646,6 +647,29 @@ Transform:
   - {fileID: 1777846330}
   m_Father: {fileID: 3555001403500375369}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1096286602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096286600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0508325494fbedf409656ddce99ddd07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gunTranforms:
+  - {fileID: 370399777}
+  - {fileID: 1098015800}
+  - {fileID: 331423783}
+  - {fileID: 1536593464}
+  - {fileID: 1777846330}
+  pistol: {fileID: 370399777}
+  revolver: {fileID: 1098015800}
+  autoRifle: {fileID: 331423783}
+  shotgun: {fileID: 1536593464}
+  rifle: {fileID: 1777846330}
 --- !u!1 &1098015799
 GameObject:
   m_ObjectHideFlags: 0
@@ -1462,9 +1486,9 @@ Transform:
   m_GameObject: {fileID: 1777846329}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.0597, y: 0.0295, z: 0.2003}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.06, y: 0.03, z: 0.2}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8303861289247391237}
   - {fileID: 8696817839560131255}
